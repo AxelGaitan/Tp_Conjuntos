@@ -1,0 +1,16 @@
+# Función recursiva para sumar todos los elementos (dígitos) de un conjunto
+def sumar_digitos (conjunto): 
+    if not conjunto: # Caso base: si el conjunto está vacío, no hay nada que sumar
+        return 0 
+    else:
+        num = conjunto.pop() #Sacamos un elemento del conjunto usando pop() (lo elimina del conjunto)
+        return num + sumar_digitos(conjunto) #Sumamos ese elemento al resultado de llamar a esta misma función con el conjunto restante
+
+# Función recursiva para sumar los dígitos de cada conjunto en una lista de conjuntos    
+def sumar_digitos_por_conjunto(lista_conjuntos, i=0): #i es el índice del conjunto actual que estamos procesando
+    if i >= len(lista_conjuntos):  # Caso base: cuando revisamos todos los conjuntos
+        return #No retorna nada
+    conjunto_copia = set(lista_conjuntos[i])  # Hacemos copia porque pop()que se usa en sumar_conjuntos modifica el conjunto
+    suma = sumar_digitos(conjunto_copia)  # Sumamos con recursividad
+    print(f"Suma de los dígitos del DNI {i + 1}: {suma}")
+    sumar_digitos_por_conjunto(lista_conjuntos, i + 1)  # # Llamada recursiva(se pasa al próximo conjunto)
