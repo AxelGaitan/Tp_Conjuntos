@@ -22,6 +22,10 @@ print("Cantidad de pares: ", pares)
 print("cantidad de impares: ", impares)
 
 
+if all (a > 2000 for a in años):
+    print("todos pertenecen al grupo Z")
+else:
+    print("no todos pertenecen al grupo Z")
 
 
 
