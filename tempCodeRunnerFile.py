@@ -1,0 +1,1 @@
+(conjunto_base, *otros_conjuntos)
