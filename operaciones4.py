@@ -227,27 +227,19 @@ def menu():
             else:
                 resultado = interseccion_conjuntos(*lista_conjuntos)
                 print("Intersección de conjuntos:", resultado)
-
-        elif opcion == "3" or opcion == "4":
-            conjunto_base = input(
-                "Ingrese el conjunto base (separado por comas): ")
-            conjunto_base = {int(x) for x in conjunto_base.split(',')}
-            num_otros_conjuntos = int(
-                input("Ingrese el número de otros conjuntos: "))
-            otros_conjuntos = []
             
-            for i in range(num_otros_conjuntos):
-                conjunto = input(f"Ingrese el conjunto {i+1} (separado por comas): ")
-                otros_conjuntos.append({int(x) for x in conjunto.split(',')})
-
+        elif opcion == "3" or opcion == "4":
+            print('Ingrese el DNI base primero. Los DNI que ingrese luego se restarán de este.')
+            conjuntos = crear_conjunto_dni()
+            conjunto_base = conjuntos[0] # Tomamos el primer conjunto como conjunto base para la operación
+            otros_conjuntos = conjuntos[1:] #Los conjuntos restantes serán los que restaremos o con los que haremos la diferencia simétrica
             if opcion == "3":
-                print("Diferencia de conjuntos:", diferencia_conjuntos(
-                conjunto_base, *otros_conjuntos))
-
+                resultado = diferencia_conjuntos(conjunto_base, *otros_conjuntos)
+                print(f"Diferencia de conjuntos: {resultado}")
             else:
-                print("Diferencia simétrica de conjuntos:",
-                    dif_simetrica_conjuntos(conjunto_base, *otros_conjuntos))
-       
+                resultado = dif_simetrica_conjuntos(conjunto_base, *otros_conjuntos)
+                print(f"Diferencia simetrica de conjuntos: {resultado}")
+
         elif opcion == "5":
             lista_conjuntos = crear_conjunto_dni()
             contar_frecuencia_y_suma(lista_conjuntos)
