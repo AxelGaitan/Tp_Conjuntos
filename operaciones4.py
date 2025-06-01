@@ -217,52 +217,37 @@ def menu():
 
         opcion = input(f"{verde}Ingrese la opción deseada: {reset}")
 
-        if opcion == "1":
+        if opcion == "1" or opcion == "2":
             lista_conjuntos = crear_conjunto_dni()
             print(f"{azul}Conjuntos creados:{reset}", lista_conjuntos)
 
-            resultado = union_conjuntos(*lista_conjuntos)
-            print("Unión de conjuntos:", resultado)
+            if opcion == "1":
+                resultado = union_conjuntos(*lista_conjuntos)
+                print("Unión de conjuntos:", resultado)
+            else:
+                resultado = interseccion_conjuntos(*lista_conjuntos)
+                print("Intersección de conjuntos:", resultado)
 
-        elif opcion == "2":
-            lista_conjuntos = crear_conjunto_dni()
-            print(f"{azul}Conjuntos creados:{reset}", lista_conjuntos)
-
-            resultado1 = interseccion_conjuntos(*lista_conjuntos)
-            print("Intersección de conjuntos:", resultado1)
-
-        elif opcion == "3":
-
-            # resultado3 = diferencia_conjuntos(conjunto_base,*otros_conjuntos)
+        elif opcion == "3" or opcion == "4":
             conjunto_base = input(
                 "Ingrese el conjunto base (separado por comas): ")
             conjunto_base = {int(x) for x in conjunto_base.split(',')}
             num_otros_conjuntos = int(
                 input("Ingrese el número de otros conjuntos: "))
             otros_conjuntos = []
+            
             for i in range(num_otros_conjuntos):
-                conjunto = input(
-                    f"Ingrese el conjunto {i+1} (separado por comas): ")
-                conjunto = {int(x) for x in conjunto.split(',')}
-                otros_conjuntos.append(conjunto)
+                conjunto = input(f"Ingrese el conjunto {i+1} (separado por comas): ")
+                otros_conjuntos.append({int(x) for x in conjunto.split(',')})
 
-            print("Diferencia de conjuntos:", diferencia_conjuntos(
+            if opcion == "3":
+                print("Diferencia de conjuntos:", diferencia_conjuntos(
                 conjunto_base, *otros_conjuntos))
 
-        elif opcion == "4":
-            conjunto_base = input(
-                "Ingrese el conjunto base (separado por comas): ")
-            conjunto_base = {int(x) for x in conjunto_base.split(',')}
-            num_otros_conjuntos = int(
-                input("Ingrese el número de otros conjuntos: "))
-            otros_conjuntos = []
-            for i in range(num_otros_conjuntos):
-                conjunto = input(
-                    f"Ingrese el conjunto {i+1} (separado por comas): ")
-                conjunto = {int(x) for x in conjunto.split(',')}
-                otros_conjuntos.append(conjunto)
-            print("Diferencia simétrica de conjuntos:",
-                  dif_simetrica_conjuntos(conjunto_base, *otros_conjuntos))
+            else:
+                print("Diferencia simétrica de conjuntos:",
+                    dif_simetrica_conjuntos(conjunto_base, *otros_conjuntos))
+       
         elif opcion == "5":
             lista_conjuntos = crear_conjunto_dni()
             contar_frecuencia_y_suma(lista_conjuntos)
@@ -283,5 +268,5 @@ def menu():
         else:
             print(f"{rojo}Opción inválida. Por favor, intente nuevamente.{reset}")
 
-
+#programa principal 
 menu()
