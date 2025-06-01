@@ -85,6 +85,8 @@ def dif_simetrica_conjuntos(conjunto_base, *otros_conjuntos):
         resultado ^= conjunto
     return resultado
 
+# ------------ Claudio-------------------
+
 
 def evaluar_conjuntos(conjuntos):
     print("\n" + "="*10 + " Evaluación de condiciones lógicas " + "="*10)
@@ -95,7 +97,7 @@ def evaluar_conjuntos(conjuntos):
         if conjuntos[i] != conjuntos[0]:
             son_equivalentes = False
     if son_equivalentes:
-        print("✔ Todos los conjuntos son equivalentes")
+        print(" Todos los conjuntos son equivalentes")
 
     # 2. Ver si todos los conjuntos tienen al menos 5 elementos
     diversidad_alta = True
@@ -103,14 +105,14 @@ def evaluar_conjuntos(conjuntos):
         if len(c) < 5:
             diversidad_alta = False
     if diversidad_alta:
-        print("✔ Alta diversidad numérica (todos tienen al menos 5 elementos)")
+        print(" Alta diversidad numérica (todos tienen al menos 5 elementos)")
 
     # 3. Ver si no comparten ningún dígito entre todos
     interseccion_total = conjuntos[0].copy()
     for c in conjuntos[1:]:
         interseccion_total &= c
     if len(interseccion_total) == 0:
-        print("✔ Conjuntos totalmente independientes (sin elementos en común)")
+        print(" Conjuntos totalmente independientes (sin elementos en común)")
 
     # 4. Ver si hay más conjuntos con cantidad impar de dígitos que pares
     cantidad_impares = 0
@@ -121,38 +123,19 @@ def evaluar_conjuntos(conjuntos):
         else:
             cantidad_pares += 1
     if cantidad_impares > cantidad_pares:
-        print("✔ Etiqueta: grupo impar (más conjuntos con cantidad impar de elementos)")
+        print(" Etiqueta: grupo impar (más conjuntos con cantidad impar de elementos)")
 
     # 5. Buscar si algún dígito aparece en todos los conjuntos
     union_total = set().union(*conjuntos)
     for digito in union_total:
         if all(digito in c for c in conjuntos):
-            print(f"✔ El dígito {digito} está en todos los conjuntos.")
+            print(f" El dígito {digito} está en todos los conjuntos.")
 
     return "Evaluación de conjuntos completada."
-# Prueba de las funciones (ESTA PARTE SE DESCARTA)
-
-# conjunto_dni = crear_conjunto_dni()
-# print(conjunto_dni)
 
 
-# a = {1,2,3}
-# b= {3,1,5,6,7}
-
-# c = union_conjuntos(a,b)
-# d = interseccion_conjuntos(a,b)
-# e = diferencia_conjuntos(a,b)
-# f = dif_simetrica_conjuntos(a,b)
-
-# print (c)
-# print(d)
-# print(e)
-# print(f)
-
-# -----------------------------------------------------------------------------------------------
-
-# DIANA
-#
+# ----------------Fin Claudio------------------------
+# ---------Comienza Diana-------------------
 # Conteo de frecuencia de cada dígito en cada DNI utilizando estructuras repetitivas.
 # Suma total de los dígitos de cada DNI.
 
@@ -175,14 +158,58 @@ def contar_frecuencia_y_suma(lista_conjuntos):
         print(" - Suma total de los dígitos:", suma)
         print()
 
-# Llamar a las funciones
-# lista_conjuntos = crear_conjunto_dni()
-# contar_frecuencia_y_suma(lista_conjuntos)
+# ---------Fin Diana-------------------
+# ----- Comienza Axel-------------------
 
 
+def analizar_anios_y_edades():
+    años = []
+    cantidad = int(input("¿Cuántos años de nacimiento desea ingresar?: "))
+
+    for i in range(cantidad):
+        anio = int(input(f"Ingrese el año de nacimiento {i + 1}: "))
+        años.append(anio)
+
+    print("Años ingresados:", años)
+
+    pares = sum(1 for a in años if a % 2 == 0)
+    impares = len(años) - pares
+    print("Cantidad de pares:", pares)
+    print("Cantidad de impares:", impares)
+
+    if all(a > 2000 for a in años):
+        print(" Todos pertenecen al grupo Z")
+    else:
+        print(" No todos pertenecen al grupo Z")
+
+    # Función interna para verificar si un año es bisiesto
+    def es_bisiesto(anio):
+        return (anio % 4 == 0 and anio % 100 != 0) or (anio % 400 == 0)
+
+    bisiestos = [a for a in años if es_bisiesto(a)]
+    if bisiestos:
+        print(" Años bisiestos ingresados:", bisiestos)
+    else:
+        print(" Ninguno nació en un año bisiesto")
+
+    # Calcular edades en 2025
+    edades = [2025 - a for a in años]
+    print("Edades actuales:", edades)
+
+    # Producto cartesiano
+    producto_cartesiano = [(a, e) for a in años for e in edades]
+    print("Producto cartesiano entre años y edades:")
+    for par in producto_cartesiano:
+        print(par)
+
+    return  # No devuelve datos, solo imprime todo
+# ----- Fin Axel-------------------
+
+# ------ Comienzo Yoni-------
+
+    # fin Yoni
 ############################################
-# MENU - DIANA
-
+# MENU
 print(f"{azul}Bienvenido{reset}")
 # print(f"{verde}Primero crearemos el conjunto de DNIs{reset}")
 
@@ -196,7 +223,8 @@ def menu():
         print("4. Diferencia simétrica de conjuntos")
         print("5. Contar frecuencia y suma de dígitos")
         print("6. Evaluar condiciones lógicas de conjuntos")
-        print("7. Salir")
+        print("7. Analizar años de nacimiento")
+        print("8. Salir")
 
         opcion = input(f"{verde}Ingrese la opción deseada: {reset}")
 
@@ -258,6 +286,9 @@ def menu():
             print("Evaluacion Conjuntos:", resultado4)
 
         elif opcion == "7":
+            analizar_anios_y_edades()
+
+        elif opcion == "8":
             print(f"{rojo}Saliendo del programa...{reset}")
             break
         else:
